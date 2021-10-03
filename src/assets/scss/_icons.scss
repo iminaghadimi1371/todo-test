@@ -1,0 +1,23 @@
+.icon-cross {
+  &:before {
+    content: url("src/assets/images/icon-cross.svg");
+  }
+}
+
+.icon-check {
+  &:before {
+    content: url("src/assets/images/icon-check.svg");
+  }
+}
+
+.icon-moon {
+  &:before {
+    content: url("src/assets/images/icon-moon.svg");
+  }
+}
+
+.icon-sun {
+  &:before {
+    content: url("src/assets/images/icon-sun.svg");
+  }
+}

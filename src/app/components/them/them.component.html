@@ -1,0 +1,3 @@
+<button type="button" mat-icon-button  [disableRipple]="true" (click)="changeTheme()" >
+  <i [ngClass]="{'icon-sun': cssClass === DARK_THEME, 'icon-moon': cssClass === LIGHT_THEME}"></i>
+</button>

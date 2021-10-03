@@ -1,0 +1,241 @@
+/* You can add global styles to this file, and also import other style files */
+@import "app/app.component";
+@import "src/assets/scss/variables";
+@import "src/assets/scss/icons";
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+/*******************************
+ Default global styles
+********************************/
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Josefin Sans'
+);
+
+@include angular-material-typography($custom-typography);
+
+* {
+  font-family: 'Josefin Sans';
+  font-size: $root-font-size;
+  font-weight: $font-weight-bold;
+}
+
+.container {
+  max-width: 567px;
+  padding-top: 4.3rem !important;
+}
+
+small {
+  font-size: 15px;
+}
+
+/************************************
+ Theming section
+*************************************/
+$Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-blue $very-dark-desaturated-blue $white,
+'dark' $very-dark-desaturated-blue $very-dark-blue $very-dark-gray-blue $light-gray-blue $very-dark-blue;
+
+@each $type, $card-color,$hover-card-color, $border_color, $font-color, $background_color in $Theming-modes {
+  .#{$type}-theme {
+    body {
+      background: $background_color;
+    }
+
+    button.footer-button {
+      background: $card-color;
+      color: $font-color;
+    }
+
+    .mat-form-field-label,
+    .mat-warn .mat-input-element,
+    .mat-form-field-invalid .mat-input-element,
+    ::placeholder,
+    .guid-text {
+      color: $font-color !important;
+      caret-color: $font-color !important;
+      opacity: 0.5;
+    }
+
+    .mat-snack-bar-container {
+      color: $font-color;
+      background: $card-color;
+    }
+
+    .header {
+
+      height: 300px;
+      width: 100%;
+      background-image: url("src/assets/images/bg-desktop-#{$type}.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      .title-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 50px;
+
+        h1.todo-title {
+          letter-spacing: 14px;
+          font-size: 40px;
+          font-weight: $font-weight-bold;
+          color: $very-light-gray;
+          font-family: sans-serif;
+        }
+      }
+      .drag-box-container {
+        max-width: 100%;
+        border-bottom: 0;
+        min-height: 60px;
+        display: block;
+        background: $card-color;
+        overflow: hidden;
+        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+        0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    .drag-box, .cdk-drag-preview {
+      border-bottom: 1px solid $border_color;
+      padding: 16px;
+      color: $font-color;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      box-sizing: border-box;
+      cursor: move;
+      background-color: $card-color;
+      justify-content: space-between;
+      transition: background-color 0.1s;
+      .display-on-hover {
+        visibility: hidden;
+        transition: visibility 0.1s, opacity 0.5s linear;
+      }
+
+      &:hover {
+        background-color: $hover-card-color;
+        &.disable-change-background{
+          background-color: $card-color;
+        }
+        .display-on-hover {
+          visibility: visible;
+        }
+      }
+
+      .to_do_title {
+        padding-left: 20px;
+      }
+
+      &.done-true {
+        .to_do_title {
+          text-decoration: line-through $font-color;
+          opacity: 0.3;
+        }
+      }
+    }
+
+    .cdk-drag-preview {
+      box-sizing: border-box;
+      box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14),
+      0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    }
+  }
+  @media(max-width: 768px) {
+    .#{$type}-theme {
+      .header {
+        height: 300px;
+      }
+      .drag-box{
+        .display-on-hover {
+          visibility: visible;
+        }
+
+      }
+    }
+  }
+}
+
+
+/*********************************
+ checkBox and input style - start
+**********************************/
+.drag-box-radius {
+  border-radius: 5px;
+}
+
+.custom-frame {
+  padding-right: 20px;
+
+  & .mat-checkbox-background, .mat-checkbox-frame {
+    border-radius: 100% !important;
+    border: 1px solid $very-light-gray-blue;
+
+  }
+
+  &.checked {
+    & .mat-checkbox-background, .mat-checkbox-frame {
+      border: none;
+
+    }
+  }
+
+  .mat-checkbox-inner-container {
+    width: 25px;
+    height: 25px;
+
+  }
+
+}
+
+// overwrite the checkbox background
+.mat-checkbox-checked .mat-checkbox-background,
+.mat-checkbox-indeterminate .mat-checkbox-background {
+  background: linear-gradient(
+      135deg, $bright-bue, #b6006e) !important;
+  opacity: 0.7;
+}
+
+// overwrite the ripple overlay on hover and click
+.mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+  background: linear-gradient(
+      135deg, $bright-bue, #b6006e) !important;
+}
+
+.mat-form-field-underline {
+  display: none;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+.mat-form-field-infix {
+  border: 0;
+}
+
+.mat-form-field-should-float {
+  .mat-form-field-label {
+    display: none !important;
+  }
+}
+
+.mat-icon-button {
+  width: 20px !important;
+  height: 20px !important;
+  line-height: 20px !important;
+}
+
+/********************************
+ checkBox and input style - end
+*********************************/

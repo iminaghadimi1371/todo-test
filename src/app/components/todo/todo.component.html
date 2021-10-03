@@ -1,0 +1,82 @@
+<div class="header">
+  <div class="row text-center">
+    <div class="col-12">
+      <!--          Title - start-->
+      <div class="container">
+        <div class="title-container">
+          <h1 class="todo-title mb-0">{{'todo' | uppercase}}</h1>
+          <app-them></app-them>
+        </div>
+        <!--          Title - end-->
+        <!--          ToDoForm - start-->
+        <app-todo-form (toDoForm)="addItemToList($event)"></app-todo-form>
+        <!--          ToDoForm - end-->
+        <div class="drag-box-container drag-box-radius mb-4">
+          <!--          ToDoLists - start-->
+          <div cdkDropList (cdkDropListDropped)="drop($event)">
+            <div class="drag-box"
+                 [ngClass]="{'done-true': toDo.isCompleted}"
+                 *ngFor="let toDo of toDoLists | toDoActivity: statusOfTasks" cdkDrag>
+              <ng-container>
+                <mat-checkbox class="custom-frame" [checked]="toDo.isCompleted"
+                              [ngClass]="{'checked' : toDo.isCompleted}"
+                              (change)="toDo.toggleIsCompleted()">
+                  <span class="to_do_title">{{toDo.title}}</span>
+                </mat-checkbox>
+                <button type="button" mat-icon-button (click)="removeToDoFromList(toDo)"
+                        [disableRipple]="true" class="display-on-hover">
+                  <i class="icon-cross"></i>
+                </button>
+              </ng-container>
+            </div>
+          </div>
+          <!--          ToDoLists - end-->
+          <!--          Footer - start-->
+          <div class="drag-box border-0 disable-change-background">
+            <small>{{(toDoLists | toDoActivity: todoType.STATUS_ACTIVE).length}} items Left</small>
+            <div class="d-none d-md-inline">
+              <ng-container *ngTemplateOutlet="tabs"></ng-container>
+            </div>
+            <button type="button" (click)="clearAllCompleted()" class="footer-button p-0"
+                    mat-flat-button [disableRipple]="true">
+              <small>{{"clear completed" | titlecase}}</small>
+            </button>
+          </div>
+
+          <!--          Footer - end-->
+        </div>
+        <div class="drag-box-container drag-box-radius mb-4 d-md-none">
+          <div class="drag-box disable-change-background border-0 justify-content-center">
+            <ng-container *ngTemplateOutlet="tabs"></ng-container>
+          </div>
+        </div>
+
+        <p class="guid-text text-center">
+          Drag and drop to reorder list
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #tabs>
+  <button type="button" (click)="changePipeVariable(todoType.STATUS_ALL)" mat-flat-button
+          class="footer-button"
+          [disableRipple]="true"
+          [ngClass]="{'active': statusOfTasks ===  todoType.STATUS_ALL}">
+    <small>{{'all' | titlecase}}</small>
+  </button>
+  <button type="button" (click)="changePipeVariable(todoType.STATUS_ACTIVE)" mat-flat-button
+          class="footer-button"
+          [disableRipple]="true"
+          [ngClass]="{'active': statusOfTasks ===  todoType.STATUS_ACTIVE}">
+    <small>{{"active" | titlecase}}</small>
+  </button>
+  <button type="button" (click)="changePipeVariable(todoType.STATUS_COMPLETED)" mat-flat-button
+          class="footer-button"
+          [disableRipple]="true"
+          [ngClass]="{'active': statusOfTasks ===  todoType.STATUS_COMPLETED}">
+    <small>{{"completed" | titlecase}}</small>
+  </button>
+</ng-template>
+

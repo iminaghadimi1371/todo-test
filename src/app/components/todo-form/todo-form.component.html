@@ -1,0 +1,10 @@
+<form [formGroup]="toDoForm" (ngSubmit)="addItemToList()" class="mb-4">
+  <div class="drag-box justify-content-start drag-box-radius border-0 disable-change-background">
+    <mat-checkbox class="custom-frame" formControlName="isCompleted"
+                  [ngClass]="{'checked' : toDoForm.get('isCompleted').value}"></mat-checkbox>
+    <mat-form-field class="example-full-width">
+      <mat-label>Create a new todo...</mat-label>
+      <input type="text" matInput formControlName="title" placeholder="Create a new todo...">
+    </mat-form-field>
+  </div>
+</form>
