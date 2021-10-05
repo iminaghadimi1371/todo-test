@@ -29,7 +29,7 @@ $custom-typography: mat-typography-config(
 
 .container {
   max-width: 567px;
-  padding-top: 4.3rem !important;
+  padding-top: 4.3rem;
 }
 
 small {
@@ -42,7 +42,7 @@ small {
 $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-blue $very-dark-desaturated-blue $white,
 'dark' $very-dark-desaturated-blue $very-dark-blue $very-dark-gray-blue $light-gray-blue $very-dark-blue;
 
-@each $type, $card-color,$hover-card-color, $border_color, $font-color, $background_color in $Theming-modes {
+@each $type, $card-color, $hover-card-color, $border_color, $font-color, $background_color in $Theming-modes {
   .#{$type}-theme {
     body {
       background: $background_color;
@@ -50,7 +50,7 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
 
     button.footer-button {
       background: $card-color;
-      color: $font-color;
+      color: lighten($font-color, 50%);
     }
 
     .mat-form-field-label,
@@ -92,6 +92,7 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
           font-family: sans-serif;
         }
       }
+
       .drag-box-container {
         max-width: 100%;
         border-bottom: 0;
@@ -117,6 +118,11 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
       background-color: $card-color;
       justify-content: space-between;
       transition: background-color 0.1s;
+
+      &.left-label {
+        color: lighten($font-color, 50%);
+      }
+
       .display-on-hover {
         visibility: hidden;
         transition: visibility 0.1s, opacity 0.5s linear;
@@ -124,9 +130,11 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
 
       &:hover {
         background-color: $hover-card-color;
-        &.disable-change-background{
+
+        &.disable-change-background {
           background-color: $card-color;
         }
+
         .display-on-hover {
           visibility: visible;
         }
@@ -156,9 +164,13 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
       .header {
         height: 300px;
       }
-      .drag-box{
+
+      .drag-box {
         .display-on-hover {
           visibility: visible;
+        }
+        &:hover {
+          background-color: transparent;
         }
 
       }
@@ -178,8 +190,8 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
   padding-right: 20px;
 
   & .mat-checkbox-background, .mat-checkbox-frame {
-    border-radius: 100% !important;
-    border: 1px solid $very-light-gray-blue;
+    border-radius: 100%;
+    border: 1px solid $light-gray-blue;
 
   }
 
@@ -202,14 +214,14 @@ $Theming-modes: 'light' $very-light-gray $light-grayish-blue-hover $light-gray-b
 .mat-checkbox-checked .mat-checkbox-background,
 .mat-checkbox-indeterminate .mat-checkbox-background {
   background: linear-gradient(
-      135deg, $bright-bue, #b6006e) !important;
+      135deg, $bright-bue, #b6006e);
   opacity: 0.7;
 }
 
 // overwrite the ripple overlay on hover and click
 .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
   background: linear-gradient(
-      135deg, $bright-bue, #b6006e) !important;
+      135deg, $bright-bue, #b6006e);
 }
 
 .mat-form-field-underline {
