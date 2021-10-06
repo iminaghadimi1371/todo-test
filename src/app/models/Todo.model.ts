@@ -7,8 +7,4 @@ export class TodoModel {
     this.isCompleted = item.isCompleted || false;
   }
 
-  toggleIsCompleted() {
-    this.isCompleted = !this.isCompleted;
-  }
-
 }

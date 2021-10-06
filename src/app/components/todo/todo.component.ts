@@ -29,6 +29,15 @@ export class TodoComponent implements OnInit {
     this.getAllTasks();
   }
 
+  toggleIsCompleted(toDo:TodoModel){
+    const index = this.toDoLists.findIndex(toDoItem => toDoItem === toDo);
+    const todoItems = [...this.toDoLists];
+    todoItems[index].isCompleted = !toDo.isCompleted;
+    this.toDoLists = [...todoItems];
+
+
+
+  }
 
   getAllTasks(): void {
     this.tasksService.getTasks().subscribe(tasks => {

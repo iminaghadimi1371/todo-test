@@ -21,7 +21,7 @@
               <ng-container>
                 <mat-checkbox class="custom-frame" [checked]="toDo.isCompleted"
                               [ngClass]="{'checked' : toDo.isCompleted}"
-                              (change)="toDo.toggleIsCompleted()">
+                              (change)="toggleIsCompleted(toDo)">
                   <span class="to_do_title">{{toDo.title}}</span>
                 </mat-checkbox>
                 <button type="button" mat-icon-button (click)="removeToDoFromList(toDo)"
